@@ -1,0 +1,1 @@
+# Quine-McCluskey_zavrsni_rad
