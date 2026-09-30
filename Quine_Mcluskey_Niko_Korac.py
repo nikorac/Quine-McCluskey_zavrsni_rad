@@ -1,6 +1,6 @@
 #  Pomoćne funkcije
 
-def count_ones(s: str) -> int:
+def count_ones(s):
     """Vraća broj '1' znakova u binarnom stringu (mintermu)."""
     count = 0
     for c in s:
@@ -8,7 +8,7 @@ def count_ones(s: str) -> int:
             count += 1
     return count
 
-def differ_by_one_bit(a: str, b: str):
+def differ_by_one_bit(a, b):
     """
     Provjerava razlikuju li se dva binarna stringa u točno jednom bitu.
     Vraća indeks tog bita, ili None ako se razlikuju na više mjesta ili na poziciji '-'.
@@ -26,7 +26,7 @@ def differ_by_one_bit(a: str, b: str):
         return diff_pos
     return None
 
-def merge_terms(a: str, b: str) -> str:
+def merge_terms(a, b):
     """
     Spaja dva binarna stringa u jedan tako da na poziciji razlike stavlja '-'.
     Baca ValueError ako se stringovi razlikuju na više od jednog mjesta.
@@ -43,7 +43,7 @@ def merge_terms(a: str, b: str) -> str:
             result += a[i]
     return result
 
-def int_to_bin(n: int, num_vars: int) -> str:
+def int_to_bin(n, num_vars):
     """Pretvara cijeli broj n u binarni string duljine num_vars."""
     result = ""
     temp = n
@@ -55,7 +55,7 @@ def int_to_bin(n: int, num_vars: int) -> str:
         temp = temp // 2
     return result
 
-def term_to_expression(term: str, variables: list[str]) -> str:
+def term_to_expression(term, variables):
     """
     Pretvara binarni string termina u algebarski izraz (npr. 10-1 -> AB'D).
     Vraća '1' ako je term složen samo od '-' znakova (tautologija).
@@ -71,7 +71,7 @@ def term_to_expression(term: str, variables: list[str]) -> str:
         return "1"
     return result
 
-def find_prime_implicants(minterms: list[int], dont_cares: list[int], num_vars: int):
+def find_prime_implicants(minterms, dont_cares, num_vars):
 
     def make_initial_groups():
         """
@@ -227,7 +227,7 @@ def find_prime_implicants(minterms: list[int], dont_cares: list[int], num_vars: 
 
     return [pi for pi in prime_implicants if covers_real_minterm(pi)]
 
-def build_prime_implicant_chart(minterms: list[int], prime_implicants: list, variables: list[str]) -> None:
+def build_prime_implicant_chart(minterms, prime_implicants, variables):
     """
     Ispisuje tablicu primarnih implikanata u konzolu.
 
@@ -301,7 +301,7 @@ def build_prime_implicant_chart(minterms: list[int], prime_implicants: list, var
 
     print()
 
-def find_essential_prime_implicants(minterms: list[int], prime_implicants: list):
+def find_essential_prime_implicants(minterms, prime_implicants):
     """
     Pronalazi esencijalne primarne implikante — one koji jedini pokrivaju neki minterm.
 
@@ -342,7 +342,7 @@ def find_essential_prime_implicants(minterms: list[int], prime_implicants: list)
 
     return essential_indices, covered
 
-def petricks_method(minterms: list[int], prime_implicants: list, covered: list[int], essential_indices: list[int]):
+def petricks_method(minterms, prime_implicants, covered, essential_indices):
     """
     Rješava problem pokrivanja preostalih minterma korištenjem Petrickove metode.
     
@@ -385,7 +385,7 @@ def petricks_method(minterms: list[int], prime_implicants: list, covered: list[i
         return sorted(set(x + y))
 
     def is_redundant(c1, result):
-        """Provjerava je li izraz nadskup postojećeg izraza (Zakon apsorpcije: A + AB = A)."""
+        """Provjerava je je li izraz nadskup postojećeg izraza (Zakon apsorpcije: A + AB = A)."""
         for c2 in result:
             if c1 != c2 and len(c2) < len(c1) and all(item in c1 for item in c2):
                 return True
@@ -441,3 +441,4 @@ def petricks_method(minterms: list[int], prime_implicants: list, covered: list[i
     best_covers = find_best_covers(cover)
     print(f"Minimalni pokrivači (dodatni PI-ji uz esencijalne): {best_covers}")
     return best_covers
+    
